@@ -74,7 +74,7 @@ export function FengShuiCalculatorModal({ isOpen, onClose, birthDate }: FengShui
   };
 
   const renderGenderSelection = () => (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in px-6 py-4">
       <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
         What is your gender?
       </h2>
@@ -108,23 +108,23 @@ export function FengShuiCalculatorModal({ isOpen, onClose, birthDate }: FengShui
     const kuaNumber = calculateKuaNumber(birthYear, gender);
 
     return (
-      <div className="animate-fade-in">
+      <div className="animate-fade-in px-6 py-4">
         <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
           Your Feng Shui Profile
         </h2>
         
         <div className="space-y-6">
-          <div className="bg-muted/30 p-6 rounded-lg border border-gold/20">
+          <div className="w-full bg-muted/30 p-6 rounded-lg border border-gold/20">
             <h3 className="text-lg font-semibold text-gold mb-2">Birth Date</h3>
             <p className="text-foreground text-xl">{format(birthDate, 'MMMM dd, yyyy')}</p>
           </div>
 
-          <div className="bg-muted/30 p-6 rounded-lg border border-gold/20">
+          <div className="w-full bg-muted/30 p-6 rounded-lg border border-gold/20">
             <h3 className="text-lg font-semibold text-gold mb-2">Chinese Zodiac</h3>
             <p className="text-foreground text-xl font-bold">{zodiac}</p>
           </div>
 
-          <div className="bg-muted/30 p-6 rounded-lg border border-gold/20">
+          <div className="w-full bg-muted/30 p-6 rounded-lg border border-gold/20">
             <h3 className="text-lg font-semibold text-gold mb-2">Kua Number</h3>
             <p className="text-foreground text-xl font-bold">{kuaNumber}</p>
           </div>
@@ -163,10 +163,9 @@ export function FengShuiCalculatorModal({ isOpen, onClose, birthDate }: FengShui
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>
         </button>
-        
-        <div className="p-6">
-          {step === 'gender' ? renderGenderSelection() : renderResults()}
-        </div>
+
+        {/* Removed p-6 here and moved padding to inside each step */}
+        {step === 'gender' ? renderGenderSelection() : renderResults()}
       </DialogContent>
     </Dialog>
   );
