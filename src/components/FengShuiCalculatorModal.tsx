@@ -136,6 +136,19 @@ export function FengShuiCalculatorModal({ isOpen, onClose, birthDate }: FengShui
         >
           Calculate Again
         </Button>
+
+        {/* New Section */}
+        <div className="mt-10 text-center">
+          <p className="text-foreground text-lg mb-4">Want to know what these mean?</p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button className="flex-1 bg-primary text-white text-lg py-4 shadow-md">
+              Purchase Report for MYR5.00
+            </Button>
+            <Button variant="outline" className="flex-1 text-lg py-4">
+              Sign Up
+            </Button>
+          </div>
+        </div>
       </div>
     );
   };
