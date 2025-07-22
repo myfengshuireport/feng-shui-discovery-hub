@@ -1,10 +1,20 @@
 import { useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
 interface DatePickerInputProps {
@@ -13,14 +23,17 @@ interface DatePickerInputProps {
   placeholder?: string;
 }
 
-export function DatePickerInput({ date, onDateChange, placeholder = "Enter your birthdate to start" }: DatePickerInputProps) {
+export function DatePickerInput({
+  date,
+  onDateChange,
+  placeholder = "Enter your birthdate to start",
+}: DatePickerInputProps) {
   const [calendarDate, setCalendarDate] = useState<Date>(date || new Date());
-  
-  // Generate year options from 1920 to current year
+  const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
+
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 1920 + 1 }, (_, i) => currentYear - i);
-  
-  // Month names
+
   const months = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -38,8 +51,13 @@ export function DatePickerInput({ date, onDateChange, placeholder = "Enter your 
     setCalendarDate(newDate);
   };
 
+  const handleDateSelect = (selected: Date | undefined) => {
+    onDateChange(selected);
+    if (selected) setPopoverOpen(false); // ✅ Close popover when day selected
+  };
+
   return (
-    <Popover>
+    <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -65,14 +83,14 @@ export function DatePickerInput({ date, onDateChange, placeholder = "Enter your 
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {months.map((month, index) => (
+                {months.map((month) => (
                   <SelectItem key={month} value={month}>
                     {month}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            
+
             <Select
               value={calendarDate.getFullYear().toString()}
               onValueChange={handleYearChange}
@@ -93,12 +111,14 @@ export function DatePickerInput({ date, onDateChange, placeholder = "Enter your 
         <Calendar
           mode="single"
           selected={date}
-          onSelect={onDateChange}
+          onSelect={handleDateSelect}
           month={calendarDate}
           onMonthChange={setCalendarDate}
           initialFocus
           className="p-3 pointer-events-auto"
-          disabled={(date) => date > new Date() || date < new Date("1920-01-01")}
+          disabled={(date) =>
+            date > new Date() || date < new Date("1920-01-01")
+          }
         />
       </PopoverContent>
     </Popover>
