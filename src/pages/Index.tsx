@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { FengShuiCalculatorModal } from "@/components/FengShuiCalculatorModal";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
-import CTASection from "@/components/CTASection";
+import { CTASection } from "@/components/CTASection";
 import { Button } from "@/components/ui/button";
 import fengShuiCoinsImage from "@/assets/feng-shui-coins.jpg";
 
