@@ -5,6 +5,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils"; 
 
 interface FengShuiCalculatorModalProps {
   isOpen: boolean;
@@ -161,7 +162,12 @@ export function FengShuiCalculatorModal({ isOpen, onClose, birthDate }: FengShui
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md bg-card border-gold/20 shadow-elegant">
+      <DialogContent
+        className={cn(
+          step === "results" ? "sm:max-w-2xl" : "sm:max-w-md",
+          "bg-card border-gold/20 shadow-elegant"
+        )}
+      >
         <button
           onClick={handleClose}
           className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
