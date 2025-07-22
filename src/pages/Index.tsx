@@ -1,4 +1,4 @@
-// src/pages/Index.tsx
+// src/pages/Index.tsx 
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { FengShuiCalculatorModal } from "@/components/FengShuiCalculatorModal";
