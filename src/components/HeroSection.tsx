@@ -1,20 +1,16 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DatePickerInput } from "@/components/DatePickerInput";
-import fengShuiHeroImage from "@/assets/hero-image.jpg"; // update path if needed
+import fengShuiHeroImage from "@/assets/hero-image.jpg";
 
-const HeroSection = () => {
-  const [birthDate, setBirthDate] = useState<Date | undefined>();
+type HeroSectionProps = {
+  birthDate: Date | undefined;
+  setBirthDate: (date: Date | undefined) => void;
+  onCalculate: () => void;
+};
 
-  const handleCalculate = () => {
-    if (birthDate) {
-      // Call your modal or calculation logic here
-      console.log("Calculating with:", birthDate);
-    }
-  };
-
+const HeroSection = ({ birthDate, setBirthDate, onCalculate }: HeroSectionProps) => {
   return (
-    <section className="relative bg-gradient-to-br from-red-900 to-yellow-800 text-white py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-red-900 to-yellow-800 text-white min-h-[90vh] py-24 overflow-hidden">
       {/* Background image with opacity overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -40,7 +36,7 @@ const HeroSection = () => {
           and unlock the secrets of ancient Chinese wisdom.
         </p>
 
-        {/* Modern DatePicker */}
+        {/* Date Picker & Button */}
         <div className="bg-white/10 backdrop-blur-md border border-gold/30 rounded-2xl p-6 shadow-lg max-w-2xl mx-auto">
           <div className="flex flex-col sm:flex-row gap-4 items-stretch">
             <DatePickerInput
@@ -51,7 +47,7 @@ const HeroSection = () => {
             <Button
               variant="gold"
               size="lg"
-              onClick={handleCalculate}
+              onClick={onCalculate}
               disabled={!birthDate}
               className="px-8 h-14 text-lg font-semibold whitespace-nowrap"
             >
