@@ -17,12 +17,19 @@ const animals = [
   "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"
 ];
 
-function calculateZodiac(birthYear: number): string {
-  const baseYear = 2020; // 2020 was the year of the Rat
-  let index = (birthYear - baseYear) % 12;
+function calculateZodiac(birthDate: Date): string {
+  const approxChineseNewYear = new Date(birthDate.getFullYear(), 1, 4); // Feb 4 of that year
+  const adjustedYear = birthDate < approxChineseNewYear 
+    ? birthDate.getFullYear() - 1 
+    : birthDate.getFullYear();
+
+  const baseYear = 2020; // Rat
+  let index = (adjustedYear - baseYear) % 12;
   if (index < 0) index += 12;
+
   return animals[index];
 }
+
 
 function calculateKuaNumber(birthYear: number, gender: string, bornBeforeChineseNewYear = false): number {
   if (bornBeforeChineseNewYear) {
