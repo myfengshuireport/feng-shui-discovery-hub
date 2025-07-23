@@ -1,16 +1,20 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DatePickerInput } from "@/components/DatePickerInput";
-import fengShuiHeroImage from "@/assets/hero-image.jpg";
+import fengShuiHeroImage from "@/assets/hero-image.jpg"; // update path if needed
 
-type HeroSectionProps = {
-  birthDate: Date | undefined;
-  setBirthDate: (date: Date | undefined) => void;
-  onCalculate: () => void;
-};
+const HeroSection = () => {
+  const [birthDate, setBirthDate] = useState<Date | undefined>();
 
-const HeroSection = ({ birthDate, setBirthDate, onCalculate }: HeroSectionProps) => {
+  const handleCalculate = () => {
+    if (birthDate) {
+      // Call your modal or calculation logic here
+      console.log("Calculating with:", birthDate);
+    }
+  };
+
   return (
-    <section className="relative bg-gradient-to-br from-red-900 to-yellow-800 text-white min-h-[90vh] py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-red-900 to-yellow-800 text-white py-24 overflow-hidden">
       {/* Background image with opacity overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -36,7 +40,7 @@ const HeroSection = ({ birthDate, setBirthDate, onCalculate }: HeroSectionProps)
           and unlock the secrets of ancient Chinese wisdom.
         </p>
 
-        {/* Date Picker & Button */}
+        {/* Modern DatePicker */}
         <div className="bg-white/10 backdrop-blur-md border border-gold/30 rounded-2xl p-6 shadow-lg max-w-2xl mx-auto">
           <div className="flex flex-col sm:flex-row gap-4 items-stretch">
             <DatePickerInput
@@ -47,7 +51,7 @@ const HeroSection = ({ birthDate, setBirthDate, onCalculate }: HeroSectionProps)
             <Button
               variant="gold"
               size="lg"
-              onClick={onCalculate}
+              onClick={handleCalculate}
               disabled={!birthDate}
               className="px-8 h-14 text-lg font-semibold whitespace-nowrap"
             >
